@@ -12,5 +12,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         TextView jokeView = findViewById(R.id.joke_text_view);
         jokeView.setText(new JokeSmith().getJoke());
+
+        TextView jokeWizardView = findViewById(R.id.joke_wizard_text_view);
+        jokeWizardView.setText(new JokeWizard().getJoke());
+
+
+
+
     }
 }
