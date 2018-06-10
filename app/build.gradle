@@ -29,4 +29,5 @@ dependencies {
     // manualJoke
     implementation project(':manualJoke')
     implementation project(':JokeWizard')
+    implementation project(':jokedisplay')
 }
