@@ -1,12 +1,17 @@
 apply plugin: 'com.android.application'
 
+def keystorePropertiesFile = file(System.properties['user.home']+'/dev/monteirodev/keystore/keystore.properties')
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     signingConfigs {
-        defaultConfig {
-            keyAlias monteirodev_alias // declared on ~/.gradle/gradle.properties
-            keyPassword monteirodev_password  // declared on ~/.gradle/gradle.properties
+        releaseConfig {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
             storeFile file(System.properties['user.home']+'/dev/monteirodev/keystore/monteirodev.jks')
-            storePassword monteirodev_password  // declared on ~/.gradle/gradle.properties
+            //storeFile keystoreProperties['storeFile']
+            storePassword keystoreProperties['storePassword']
         }
     }
     compileSdkVersion 27
@@ -22,7 +27,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.defaultConfig
+            signingConfig signingConfigs.releaseConfig
         }
     }
 }
